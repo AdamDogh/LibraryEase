@@ -1,0 +1,166 @@
+:root {
+    --primary: #2e8b57;
+    --primary-dark: #246b45;
+    --accent: #98fb98;
+    --background: #f4fff4;
+    --border: #c3e6c3;
+    --text: #2f4f4f;
+    --error: #b00020;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.1);
+}
+
+h1,
+h2 {
+    text-align: center;
+    color: var(--primary-dark);
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: #fcfffc;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+.error {
+    color: var(--error);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
+
+nav {
+    margin-top: 20px;
+    text-align: center;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table,
+th,
+td {
+    border: 1px solid var(--border);
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--accent);
+    color: var(--text);
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+.flashes {
+    list-style-type: none;
+    padding: 0;
+    margin: 1em 0;
+}
+
+.flashes li {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.flashes .error {
+    background-color: #ffe0e0;
+    color: #a10000;
+}
+
+.flashes .success {
+    background-color: #e0ffe0;
+    color: #006b00;
+}
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 128, 0, 0.1);
+}
