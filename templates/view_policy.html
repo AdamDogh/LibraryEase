@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Booking Policy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class="flashes">
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<body>
+    <div class="container">
+        <h2>Booking Policy</h2>
+        <p>Max Modification Hours: {{ policy.maxmodificationhours }}</p>
+        <p>Max Cancellation Hours: {{ policy.maxcancellationhours }}</p>
+    </div>
+</body>
+
+</html>
