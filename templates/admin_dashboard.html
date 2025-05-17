@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Welcome, Admin</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <nav>
+            <a href="{{ url_for('view_policy') }}">View Policy</a> |
+            <a href="{{ url_for('view_maintenance') }}">View Maintenance</a> |
+            <a href="{{ url_for('admin_logs') }}">Admin Logs</a> |
+            <a href="{{ url_for('feedback_summary') }}">Feedback Summary</a> |
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </div>
+</body>
+
+</html>
