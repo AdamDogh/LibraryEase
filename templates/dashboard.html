@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Dashboard - LibraryEase</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class="flashes">
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<body>
+    <div class="container">
+        <h1>Welcome, {{ name }}!</h1>
+        <nav>
+            <a href="{{ url_for('reserve_room') }}">Reserve Study Room</a> |
+            <a href="{{ url_for('borrow_asset') }}">Borrow Asset</a> |
+            <a href="{{ url_for('submit_feedback') }}">Submit Feedback</a> |
+            <a href="{{ url_for('view_policy') }}">View Policy</a> |
+            <a href="{{ url_for('view_maintenance') }}">Maintenance Logs</a> |
+            {% if session.get('role_id') == 1 %}
+            <a href="{{ url_for('admin_logs') }}">Admin Logs</a> |
+            {% endif %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </div>
+</body>
+
+</html>
