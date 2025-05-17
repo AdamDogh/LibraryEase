@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Reservations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>My Room Reservations</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        {% if reservations %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Room</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in reservations %}
+                <tr>
+                    <td>{{ r.roomid }}</td>
+                    <td>{{ r.starttime }}</td>
+                    <td>{{ r.endtime }}</td>
+                    <td>{{ r.status }}</td>
+                    <td>
+                        {% if r.status != 'cancelled' %}
+                        <form method="post" style="display:inline;">
+                            <input type="hidden" name="reservation_id" value="{{ r.reservationid }}">
+                            <button type="submit" name="action" value="cancel">Cancel</button>
+                        </form>
+                        <form method="post" style="display:inline;">
+                            <input type="hidden" name="reservation_id" value="{{ r.reservationid }}">
+                            <input type="datetime-local" name="new_start" required>
+                            <input type="datetime-local" name="new_end" required>
+                            <button type="submit" name="action" value="modify">Modify</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>You have no room reservations yet.</p>
+        {% endif %}
+
+        <h2 style="margin-top: 40px;">My Asset Reservations</h2>
+
+        {% if asset_reservations %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Asset</th>
+                    <th>Reserved Date</th>
+                    <th>Return Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in asset_reservations %}
+                <tr>
+                    <td>{{ a.assetid }}</td>
+                    <td>{{ a.reserveddate }}</td>
+                    <td>{{ a.returndate }}</td>
+                    <td>{{ a.status }}</td>
+                    <td>
+                        {% if a.status not in ['cancelled', 'returned'] %}
+                        <form method="post" style="display:inline;">
+                            <input type="hidden" name="asset_reservation_id" value="{{ a.resetreservationid }}">
+                            <button type="submit" name="action" value="cancel">Cancel</button>
+                        </form>
+                        <form method="post" style="display:inline;">
+                            <input type="hidden" name="asset_reservation_id" value="{{ a.resetreservationid }}">
+                            <input type="datetime-local" name="new_reserved" required>
+                            <input type="datetime-local" name="new_return" required>
+                            <button type="submit" name="action" value="modify">Modify</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>You have no asset reservations yet.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
