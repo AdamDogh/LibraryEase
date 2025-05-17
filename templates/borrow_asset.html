@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Borrow Asset</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class="flashes">
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<body>
+    <div class="container">
+        <h2>Borrow an Asset</h2>
+        <form method="POST">
+            <label for="asset_id">Select Asset:</label>
+            <select name="asset_id" id="asset_id" required>
+                {% for asset in assets %}
+                <option value="{{ asset.assetid }}">{{ asset.name }} ({{ asset.type }})</option>
+                {% endfor %}
+            </select>
+            <label for="reserved_date">Reserve Date:</label>
+            <input type="date" id="reserved_date" name="reserved_date" required />
+            <label for="return_date">Return Date:</label>
+            <input type="date" id="return_date" name="return_date" required />
+            <button type="submit">Borrow</button>
+        </form>
+    </div>
+</body>
+
+</html>
