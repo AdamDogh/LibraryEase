@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback Summary</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Feedback Summary (Charts)</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        {% if room_labels and room_data %}
+        <h3>Room Ratings</h3>
+        <canvas id="roomChart" width="600" height="300"></canvas>
+        {% else %}
+        <p>No room feedback data available.</p>
+        {% endif %}
+
+        {% if asset_labels and asset_data %}
+        <h3>Asset Ratings</h3>
+        <canvas id="assetChart" width="600" height="300"></canvas>
+        {% else %}
+        <p>No asset feedback data available.</p>
+        {% endif %}
+    </div>
+
+    <script>
+        {% if room_labels and room_data %}
+        const roomCtx = document.getElementById('roomChart').getContext('2d');
+        new Chart(roomCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ room_labels | tojson }},
+            datasets: [{
+                label: 'Average Rating',
+                data: {{ room_data | tojson }},
+            backgroundColor: '#98fb98',
+            borderColor: '#2e8b57',
+            borderWidth: 1
+        }]
+      },
+            options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 5
+                }
+            }
+        }
+    });
+        {% endif %}
+
+        {% if asset_labels and asset_data %}
+        const assetCtx = document.getElementById('assetChart').getContext('2d');
+        new Chart(assetCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ asset_labels | tojson }},
+            datasets: [{
+                label: 'Average Rating',
+                data: {{ asset_data | tojson }},
+            backgroundColor: '#add8e6',
+            borderColor: '#4682b4',
+            borderWidth: 1
+        }]
+      },
+            options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 5
+                }
+            }
+        }
+    });
+        {% endif %}
+    </script>
+</body>
+
+</html>
