@@ -1,4 +1,4 @@
-## 📂 What's Included
+##  What's Included
 Your download contains:
 .
 ├── app.py               # Main application entry point
@@ -12,7 +12,7 @@ Your download contains:
     ├── dashboard.html   # Main interface
     └── ...              # Other template files
 
-## 🔧 First-Time Setup
+## First-Time Setup
 1. Create Tables in postgres SQL:
    -- role table (should be created first due to foreign key dependencies)
 create table role (
